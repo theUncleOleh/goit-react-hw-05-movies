@@ -15,16 +15,11 @@ import { NavLink } from 'react-router-dom';
 const Navigation = () => (
   <nav>
     <NavLink
+      exact="true"
       to="/"
       className={({ isActive }) => (isActive ? s.link : s.active)}
     >
       Home
-    </NavLink>
-    <NavLink
-      to="/details"
-      className={({ isActive }) => (!isActive ? s.link : s.active)}
-    >
-      Details
     </NavLink>
     <NavLink
       to="/movie"
@@ -32,6 +27,13 @@ const Navigation = () => (
     >
       Movie
     </NavLink>
+    <NavLink
+      to="/details"
+      className={({ isActive }) => (!isActive ? s.link : s.active)}
+    >
+      MovieDetailsPage
+    </NavLink>
+
     <NavLink
       to="/cast"
       className={({ isActive }) => (!isActive ? s.link : s.active)}
