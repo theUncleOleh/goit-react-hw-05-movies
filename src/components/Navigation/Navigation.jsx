@@ -13,9 +13,8 @@
 import s from './Navigation.module.css';
 import { NavLink } from 'react-router-dom';
 const Navigation = () => (
-  <nav>
+  <nav className={s.header}>
     <NavLink
-      exact="true"
       to="/"
       className={({ isActive }) => (isActive ? s.link : s.active)}
     >
@@ -27,7 +26,7 @@ const Navigation = () => (
     >
       Movie
     </NavLink>
-    <NavLink
+    {/* <NavLink
       to="/details"
       className={({ isActive }) => (!isActive ? s.link : s.active)}
     >
@@ -45,7 +44,7 @@ const Navigation = () => (
       className={({ isActive }) => (!isActive ? s.link : s.active)}
     >
       Reviews
-    </NavLink>
+    </NavLink> */}
   </nav>
 );
 

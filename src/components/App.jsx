@@ -7,6 +7,7 @@ import MovieDetailsPage from '../pages/MovieDetailsPage';
 import Movie from '../pages/Movie';
 import Cast from '../pages/Cast';
 import Reviews from '../pages/Reviews';
+
 export default function App() {
   return (
     <Routes>
@@ -22,7 +23,4 @@ export default function App() {
     </Routes>
   );
 }
-
-
-
 

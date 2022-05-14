@@ -1,26 +1,22 @@
+import PageHeading from 'components/PageHeading/PageHeading';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import AxiosMovies from 'servis-api/AxiosMovie';
 
+import * as getAxiosMovie from '../servis-api/getAxiosMovie';
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
 
   useEffect(() => {
-    AxiosMovies().then(data => {
-      setMovies(data.results);
-      // setMovieId(data.resalts.id);
-
-      // console.log(data.results.title);
-    });
+    getAxiosMovie.axiosWeekMovies().then(res => setMovies(res.results));
   }, []);
 
   return (
     <>
-      <h2>Trending movies on this week</h2>
+      <PageHeading text="Trend movies on this week" />
       {movies &&
         movies.map(movie => (
           <li key={movie.id}>
-            <Link to={`${movie.id}`}>{movie.title}</Link>
+            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
           </li>
         ))}
     </>
