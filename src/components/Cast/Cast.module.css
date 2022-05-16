@@ -1,0 +1,9 @@
+.image {
+    display: block;
+    width: 150px;
+    height: 150px;
+}
+
+.list{
+    display: grid;
+}

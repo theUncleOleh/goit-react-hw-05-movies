@@ -16,9 +16,12 @@ export function axiosWeekMovies() {
 export function axiosMovieById(movieId) {
   return AxiosMovies(`${BASE_URL}/movie/${movieId}?${API_KEY}`);
 }
-// export default async function axiosMovieId(movieId) {
-//   return await axios
-//     .get(`${BASE_URL}/movie/${movieId}?${API_KEY}`)
-//     .then(res => console.log(res.data))
-//     .catch(error => console.log(error));
-// }
+
+export function axiosMovieCast(movieId) {
+  return AxiosMovies(`${BASE_URL}/movie/${movieId}/credits?${API_KEY}`);
+}
+
+export function axiosMovieReviews(movieId) {
+  return AxiosMovies(`${BASE_URL}/movie/${movieId}/reviews?${API_KEY}`);
+}
+

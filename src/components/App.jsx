@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 // import PropTypes from 'prop-types';
-import HomePage from '../pages/HomePage';
+import HomePage from '../pages/HomePage/HomePage';
 import Layout from './Layout';
-import MovieDetailsPage from '../pages/MovieDetailsPage';
+import MovieDetailsPage from '../pages/MovieDetailsPage/MovieDetailsPage';
 import Movie from '../pages/Movie';
-import Cast from '../pages/Cast';
+import Cast from './Cast/Cast';
 import Reviews from '../pages/Reviews';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="movie" element={<Movie />}>
+        <Route path="movies" element={<Movie />}>
           <Route path=":movieId" element={<MovieDetailsPage />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />

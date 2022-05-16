@@ -21,11 +21,12 @@ const Navigation = () => (
       Home
     </NavLink>
     <NavLink
-      to="/movie"
+      to="/movies"
       className={({ isActive }) => (!isActive ? s.link : s.active)}
     >
-      Movie
+      Movies
     </NavLink>
+
     {/* <NavLink
       to="/details"
       className={({ isActive }) => (!isActive ? s.link : s.active)}
