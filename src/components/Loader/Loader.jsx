@@ -3,6 +3,7 @@ import { useState } from 'react';
 import s from './Loader.module.css';
 export default function Loader() {
   const [color, setColor] = useState('#2d3ac4');
+  const [loading, setLoading] = useState(false);
   return (
     <div className={s.loader}>
       <PropagateLoader color={color} size={25} />

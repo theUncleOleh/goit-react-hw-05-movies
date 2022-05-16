@@ -4,26 +4,26 @@ import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './Cast.module.css';
 import Loader from '../Loader/Loader';
 export default function Cast() {
-  const [loading, setLoading] = useState(false);
-
   const { movieId } = useParams();
   const [credits, setCredits] = useState(null);
   useEffect(() => {
-    setLoading(true);
-    getAxiosMovie
-      .axiosMovieCast(movieId)
-      .then(data => setCredits(data.cast))
-      .catch(errorr => console.log(Error))
-      .finally(setLoading(false));
+    async function fetchCast() {
+      try {
+        await getAxiosMovie
+          .axiosMovieCast(movieId)
+          .then(data => setCredits(data.cast));
+      } catch (error) {}
+    }
+    fetchCast();
   }, [movieId]);
 
   return (
     <>
-      {credits && (
+      {credits ? (
         <ul className={s.list}>
           {credits.map(credit => (
             <li key={credit.id}>
-              {credit.name}
+              <p>{credit.name}</p>
               <img
                 className={s.image}
                 src={`https://image.tmdb.org/t/p/w500/${credit.profile_path} `}
@@ -32,8 +32,9 @@ export default function Cast() {
             </li>
           ))}
         </ul>
+      ) : (
+        <Loader />
       )}
-      <Loader loading={loading} />
     </>
   );
 }

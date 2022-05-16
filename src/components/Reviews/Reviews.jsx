@@ -2,23 +2,20 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import Loader from '../Loader/Loader';
-
+import s from './Reviews.module.css';
+// import { Audio } from 'react-loader-spinner';
 export default function Reviews() {
-  const [loading, setLoading] = useState(false);
-
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
   useEffect(() => {
-    setLoading(true);
     getAxiosMovie
       .axiosMovieReviews(movieId)
       .then(res => setReviews(res.results))
-      .catch(errorr => console.log(Error))
-      .finally(setLoading(false));
+      .catch(errorr => console.log(Error));
   }, [movieId]);
   return (
     <>
-      {reviews && (
+      {reviews ? (
         <ul>
           {reviews.map(review => (
             <li key={review.id}>
@@ -27,9 +24,13 @@ export default function Reviews() {
             </li>
           ))}
         </ul>
+      ) : (
+        <Loader />
       )}
 
-      <Loader loading={loading} />
+      {/* <div className={s.loader}>
+        <PropagateLoader color={color} loading={loading} size={25} />
+      </div>{' '} */}
     </>
   );
 }

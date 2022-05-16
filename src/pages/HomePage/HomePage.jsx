@@ -3,24 +3,23 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './HomePage.module.css';
 import Loader from 'components/Loader/Loader';
+
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
-  const [loading, setLoading] = useState(false);
+ 
 
   useEffect(() => {
-    setLoading(true);
     getAxiosMovie
       .axiosWeekMovies()
       .then(res => setMovies(res.results))
-      .catch(error => console.log(Error))
-      .finally(setLoading(false));
+      .catch(error => console.log(Error));
   }, []);
 
   return (
     <>
       <PageHeading text="Trend movies on this week" />
-      {movies && (
+      {movies ? (
         <ul>
           {movies.map(movie => (
             <li key={movie.id}>
@@ -33,8 +32,9 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+      ) : (
+        <Loader />
       )}
-      <Loader loading={loading} />
     </>
   );
 }

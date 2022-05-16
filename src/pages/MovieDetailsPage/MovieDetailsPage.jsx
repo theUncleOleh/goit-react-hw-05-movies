@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import { NavLink, useParams, Outlet } from 'react-router-dom';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './MovieDetailsPage.module.css';
-
-
+import Loader from 'components/Loader/Loader';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-  console.log(movieId);
+
   const [movieDetails, setMovieDetails] = useState(null);
   useEffect(() => {
     getAxiosMovie
@@ -16,13 +15,9 @@ export default function MovieDetailsPage() {
       .catch(error => console.log(Error));
   }, [movieId]);
 
-  // useEffect(() => {
-  //   axiosMovieId(movieId).then(setMovieDetails);
-  // }, [movieId]);
-
   return (
     <>
-      {movieDetails && (
+      {movieDetails ? (
         <>
           <h2>{movieDetails.title}</h2>
           <img
@@ -32,6 +27,8 @@ export default function MovieDetailsPage() {
           />
           <p>{movieDetails.tagline}</p>
         </>
+      ) : (
+        <Loader />
       )}
       <ul>
         <li>
