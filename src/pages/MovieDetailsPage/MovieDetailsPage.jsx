@@ -3,13 +3,17 @@ import { NavLink, useParams, Outlet } from 'react-router-dom';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './MovieDetailsPage.module.css';
 
-// import axiosMovieId from '../servis-api/getAxiosMovie';
+
+
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   console.log(movieId);
   const [movieDetails, setMovieDetails] = useState(null);
   useEffect(() => {
-    getAxiosMovie.axiosMovieById(movieId).then(res => setMovieDetails(res));
+    getAxiosMovie
+      .axiosMovieById(movieId)
+      .then(res => setMovieDetails(res))
+      .catch(error => console.log(Error));
   }, [movieId]);
 
   // useEffect(() => {

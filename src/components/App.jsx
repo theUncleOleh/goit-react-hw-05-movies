@@ -6,7 +6,7 @@ import Layout from './Layout';
 import MovieDetailsPage from '../pages/MovieDetailsPage/MovieDetailsPage';
 import Movie from '../pages/Movie';
 import Cast from './Cast/Cast';
-import Reviews from '../pages/Reviews';
+import Reviews from './Reviews/Reviews';
 
 export default function App() {
   return (

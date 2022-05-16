@@ -2,11 +2,19 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './Cast.module.css';
+import Loader from '../Loader/Loader';
 export default function Cast() {
+  const [loading, setLoading] = useState(false);
+
   const { movieId } = useParams();
   const [credits, setCredits] = useState(null);
   useEffect(() => {
-    getAxiosMovie.axiosMovieCast(movieId).then(data => setCredits(data.cast));
+    setLoading(true);
+    getAxiosMovie
+      .axiosMovieCast(movieId)
+      .then(data => setCredits(data.cast))
+      .catch(errorr => console.log(Error))
+      .finally(setLoading(false));
   }, [movieId]);
 
   return (
@@ -25,6 +33,7 @@ export default function Cast() {
           ))}
         </ul>
       )}
+      <Loader loading={loading} />
     </>
   );
 }
