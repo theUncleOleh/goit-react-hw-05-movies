@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import Loader from '../Loader/Loader';
-import s from './Reviews.module.css';
+
 import Error from 'components/Error/Error';
 import DetailsPageHeading from 'components/DetailsPageHeading/DetailsPageHeading';
 const Status = {
