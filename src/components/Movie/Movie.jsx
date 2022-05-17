@@ -5,6 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
+import Error from '../Error/Error';
+import Loader from 'react-spinners/PropagateLoader';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -37,6 +39,12 @@ export default function Movie() {
         setStatus(Status.REJECTED);
       });
   }, [searchQuery]);
+  if (status === Status.PENDING) {
+    <Loader />;
+  }
+  if (status === Status.REJECTED) {
+    <Error message={error} />;
+  }
   if (status === Status.IDLE) {
     return (
       <>
@@ -48,7 +56,6 @@ export default function Movie() {
   if (status === Status.RESOLVED) {
     return (
       <>
-        {' '}
         <PageHeading text="Movie" />
         <SearchData onSubmit={handleSubmit} />
         {movies && (
