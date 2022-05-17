@@ -4,6 +4,7 @@ import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './MovieDetailsPage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
+import PageHeading from 'components/PageHeading/PageHeading';
 
 const Status = {
   IDLE: 'idle',
@@ -31,7 +32,7 @@ export default function MovieDetailsPage() {
       });
   }, [movieId]);
   if (status === Status.IDLE) {
-    <div>Hello</div>;
+    <PageHeading text="Movie Details" />;
   }
   if (status === Status.PENDING) {
     <Loader />;
@@ -43,6 +44,7 @@ export default function MovieDetailsPage() {
   if (status === Status.RESOLVED) {
     return (
       <>
+        <PageHeading text="Movie Details" />;
         {movieDetails && (
           <>
             <h2>{movieDetails.title}</h2>

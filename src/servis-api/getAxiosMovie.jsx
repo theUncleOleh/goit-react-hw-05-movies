@@ -24,4 +24,8 @@ export function axiosMovieCast(movieId) {
 export function axiosMovieReviews(movieId) {
   return AxiosMovies(`${BASE_URL}/movie/${movieId}/reviews?${API_KEY}`);
 }
+// https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&page=1&include_adult=false
+export function axiosSearchMovies(searchQuery) {
+  return AxiosMovies(`${BASE_URL}/search/movie?${API_KEY}&query=${searchQuery}`);
+}
 
