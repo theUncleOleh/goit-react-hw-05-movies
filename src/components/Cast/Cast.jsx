@@ -3,38 +3,64 @@ import { useParams } from 'react-router-dom';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './Cast.module.css';
 import Loader from '../Loader/Loader';
+import Error from 'components/Error/Error';
+import DetailsPageHeading from '../DetailsPageHeading/DetailsPageHeading';
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  REJECTED: 'rejected',
+  RESOLVED: 'resolved',
+};
 export default function Cast() {
   const { movieId } = useParams();
   const [credits, setCredits] = useState(null);
+  const [error, setError] = useState(null);
+  const [status, setStatus] = useState(Status.IDLE);
+
   useEffect(() => {
-    async function fetchCast() {
-      try {
-        await getAxiosMovie
-          .axiosMovieCast(movieId)
-          .then(data => setCredits(data.cast));
-      } catch (error) {}
-    }
-    fetchCast();
+    setStatus(Status.PENDING);
+    getAxiosMovie
+      .axiosMovieCast(movieId)
+      .then(data => {
+        setCredits(data.cast);
+        setStatus(Status.RESOLVED);
+      })
+      .catch(error => {
+        setError(error);
+        setStatus(Status.REJECTED);
+      });
   }, [movieId]);
 
-  return (
-    <>
-      {credits ? (
-        <ul className={s.list}>
-          {credits.map(credit => (
-            <li key={credit.id}>
-              <p>{credit.name}</p>
-              <img
-                className={s.image}
-                src={`https://image.tmdb.org/t/p/w500/${credit.profile_path} `}
-                alt={credit.title}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <Loader />
-      )}
-    </>
-  );
+  if (status === Status.IDLE) {
+    return <div>Hello</div>;
+  }
+  if (status === Status.PENDING) {
+    return <Loader />;
+  }
+  if (status === Status.REJECTED) {
+    return <Error message={error} />;
+  }
+  if (status === Status.RESOLVED) {
+    return (
+      <>
+        <DetailsPageHeading text="Cast" />
+        {credits && (
+          <ul className={s.list}>
+            {credits.map(credit => (
+              <li key={credit.id}>
+                <p>{credit.name}</p>
+                <img
+                  className={s.image}
+                  src={`https://image.tmdb.org/t/p/w500/${credit.profile_path} `}
+                  alt={credit.title}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
+  }
 }
+
+
