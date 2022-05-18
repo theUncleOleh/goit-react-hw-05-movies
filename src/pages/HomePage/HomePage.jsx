@@ -1,6 +1,6 @@
 import PageHeading from 'components/PageHeading/PageHeading';
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import s from './HomePage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
@@ -15,7 +15,10 @@ export default function HomePage() {
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(navigate);
+  console.log(location);
   useEffect(() => {
     setStatus(Status.PENDING);
     getAxiosMovie

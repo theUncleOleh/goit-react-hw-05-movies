@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useParams, Outlet } from 'react-router-dom';
-import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
+import { NavLink, Outlet } from 'react-router-dom';
+
 import s from './MovieDetailsPage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
 import PageHeading from 'components/PageHeading/PageHeading';
-
+import { useFetchMovieDetails } from '../../hooks/useFetchMoviesDetails';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -13,24 +12,26 @@ const Status = {
   RESOLVED: 'resolved',
 };
 export default function MovieDetailsPage() {
-  const { movieId } = useParams();
-  const [error, setError] = useState(null);
-  const [status, setStatus] = useState(Status.IDLE);
+  const { movieDetails, status, error } = useFetchMovieDetails();
+  // const { movieId } = useParams();
+  // const [error, setError] = useState(null);
+  // const [status, setStatus] = useState(Status.IDLE);
 
-  const [movieDetails, setMovieDetails] = useState(null);
-  useEffect(() => {
-    setStatus(Status.PENDING);
-    getAxiosMovie
-      .axiosMovieById(movieId)
-      .then(res => {
-        setMovieDetails(res);
-        setStatus(Status.RESOLVED);
-      })
-      .catch(error => {
-        setError(error);
-        setStatus(Status.REJECTED);
-      });
-  }, [movieId]);
+  // const [movieDetails, setMovieDetails] = useState(null);
+  // useEffect(() => {
+  //   setStatus(Status.PENDING);
+  //   getAxiosMovie
+  //     .axiosMovieById(movieId)
+  //     .then(res => {
+  //       // console.log(res);
+  //       setMovieDetails(res);
+  //       setStatus(Status.RESOLVED);
+  //     })
+  //     .catch(error => {
+  //       setError(error);
+  //       setStatus(Status.REJECTED);
+  //     });
+  // }, [movieId]);
   if (status === Status.IDLE) {
     <PageHeading text="Movie Details" />;
   }
@@ -44,7 +45,7 @@ export default function MovieDetailsPage() {
   if (status === Status.RESOLVED) {
     return (
       <>
-        <PageHeading text="Movie Details" />;
+        <PageHeading text="Movie Details" />
         {movieDetails && (
           <>
             <h2>{movieDetails.title}</h2>
@@ -54,6 +55,12 @@ export default function MovieDetailsPage() {
               alt={movieDetails.title}
             />
             <p>{movieDetails.tagline}</p>
+            <span>{movieDetails.overview}</span>
+            <ul>
+              {movieDetails.genres.map(genre => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
             <ul>
               <li>
                 <NavLink to={'cast'}>Cast</NavLink>

@@ -1,35 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import s from './Cast.module.css';
 import Loader from '../Loader/Loader';
 import Error from 'components/Error/Error';
 import DetailsPageHeading from '../DetailsPageHeading/DetailsPageHeading';
+import { useFetchCast } from '../../hooks/useFetchCast';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
   REJECTED: 'rejected',
   RESOLVED: 'resolved',
 };
-export default function Cast() {
-  const { movieId } = useParams();
-  const [credits, setCredits] = useState(null);
-  const [error, setError] = useState(null);
-  const [status, setStatus] = useState(Status.IDLE);
 
-  useEffect(() => {
-    setStatus(Status.PENDING);
-    getAxiosMovie
-      .axiosMovieCast(movieId)
-      .then(data => {
-        setCredits(data.cast);
-        setStatus(Status.RESOLVED);
-      })
-      .catch(error => {
-        setError(error);
-        setStatus(Status.REJECTED);
-      });
-  }, [movieId]);
+export default function Cast() {
+  // const { movieId } = useParams();
+  // const [credits, setCredits] = useState(null);
+  // const [error, setError] = useState(null);
+  // const [status, setStatus] = useState(Status.IDLE);
+
+  // useEffect(() => {
+  //   setStatus(Status.PENDING);
+  //   getAxiosMovie
+  //     .axiosMovieCast(movieId)
+  //     .then(data => {
+  //       setCredits(data.cast);
+  //       setStatus(Status.RESOLVED);
+  //     })
+  //     .catch(error => {
+  //       setError(error);
+  //       setStatus(Status.REJECTED);
+  //     });
+  // }, [movieId]);
+  const { error, credits, status } = useFetchCast();
 
   if (status === Status.IDLE) {
     return <div>Hello</div>;
@@ -62,5 +62,3 @@ export default function Cast() {
     );
   }
 }
-
-

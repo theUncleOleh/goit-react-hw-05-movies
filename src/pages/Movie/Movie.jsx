@@ -1,12 +1,14 @@
-import PageHeading from '../PageHeading/PageHeading';
+import PageHeading from '../../components/PageHeading/PageHeading';
 import { NavLink } from 'react-router-dom';
-import SearchData from '../SearchData/SearchData';
+import SearchData from '../../components/SearchData/SearchData';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
-import Error from '../Error/Error';
+
+import Error from '../../components/Error/Error';
 import Loader from 'react-spinners/PropagateLoader';
+import PropTypes from 'prop-types';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -39,6 +41,7 @@ export default function Movie() {
         setStatus(Status.REJECTED);
       });
   }, [searchQuery]);
+
   if (status === Status.PENDING) {
     <Loader />;
   }
@@ -82,3 +85,7 @@ export default function Movie() {
     );
   }
 }
+
+Movie.propTypes = {
+  query: PropTypes.string,
+};

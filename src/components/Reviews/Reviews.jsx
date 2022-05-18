@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
 import Loader from '../Loader/Loader';
-
+import { useFetchReviews } from '../../hooks/useFetchReviews';
 import Error from 'components/Error/Error';
 import DetailsPageHeading from 'components/DetailsPageHeading/DetailsPageHeading';
 const Status = {
@@ -11,24 +8,9 @@ const Status = {
   REJECTED: 'rejected',
   RESOLVED: 'resolved',
 };
+
 export default function Reviews() {
-  const { movieId } = useParams();
-  const [reviews, setReviews] = useState(null);
-  const [error, setError] = useState(null);
-  const [status, setStatus] = useState(Status.IDLE);
-  useEffect(() => {
-    setStatus(Status.PENDING);
-    getAxiosMovie
-      .axiosMovieReviews(movieId)
-      .then(res => {
-        setReviews(res.results);
-        setStatus(Status.RESOLVED);
-      })
-      .catch(error => {
-        setError(error);
-        setStatus(Status.REJECTED);
-      });
-  }, [movieId]);
+  const { error, status, reviews } = useFetchReviews();
   if (status === Status.IDLE) {
     return <div>Hello</div>;
   }
