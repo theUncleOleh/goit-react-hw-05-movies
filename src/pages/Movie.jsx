@@ -1,12 +1,12 @@
-import PageHeading from '../../components/PageHeading/PageHeading';
+import PageHeading from '../components/PageHeading/PageHeading';
 import { NavLink } from 'react-router-dom';
-import SearchData from '../../components/SearchData/SearchData';
+import SearchData from '../components/SearchData/SearchData';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
-import * as getAxiosMovie from '../../servis-api/getAxiosMovie';
+import * as getAxiosMovie from '../servis-api/getAxiosMovie';
 
-import Error from '../../components/Error/Error';
+import Error from '../components/Error/Error';
 import Loader from 'react-spinners/PropagateLoader';
 import PropTypes from 'prop-types';
 const Status = {

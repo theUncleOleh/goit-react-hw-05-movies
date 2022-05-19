@@ -1,10 +1,9 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import s from './MovieDetailsPage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
 import PageHeading from 'components/PageHeading/PageHeading';
-import { useFetchMovieDetails } from '../../hooks/useFetchMoviesDetails';
+import { useFetchMovieDetails } from '../hooks/useFetchMoviesDetails';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -13,7 +12,12 @@ const Status = {
 };
 export default function MovieDetailsPage() {
   const { movieDetails, status, error } = useFetchMovieDetails();
-  // const { movieId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const onGoBack = () => {
+    navigate(location?.state?.from ?? '/');
+  };
+  // // const { movieId } = useParams();
   // const [error, setError] = useState(null);
   // const [status, setStatus] = useState(Status.IDLE);
 
@@ -46,11 +50,13 @@ export default function MovieDetailsPage() {
     return (
       <>
         <PageHeading text="Movie Details" />
+        <button type="button" onClick={onGoBack}>
+          Go home
+        </button>
         {movieDetails && (
           <>
             <h2>{movieDetails.title}</h2>
             <img
-              className={s.image}
               src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path} `}
               alt={movieDetails.title}
             />
@@ -63,10 +69,19 @@ export default function MovieDetailsPage() {
             </ul>
             <ul>
               <li>
-                <NavLink to={'cast'}>Cast</NavLink>
+                <Link
+                  to={'cast'}
+                  state={{
+                    from: {
+                      location,
+                    },
+                  }}
+                >
+                  Cast
+                </Link>
               </li>
               <li>
-                <NavLink to={'reviews'}>Reviews</NavLink>
+                <Link to={'reviews'}>Reviews</Link>
               </li>
             </ul>
             <hr />

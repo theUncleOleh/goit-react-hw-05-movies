@@ -1,8 +1,9 @@
-import s from './Cast.module.css';
-import Loader from '../Loader/Loader';
+import Loader from '../components/Loader/Loader';
 import Error from 'components/Error/Error';
-import DetailsPageHeading from '../DetailsPageHeading/DetailsPageHeading';
-import { useFetchCast } from '../../hooks/useFetchCast';
+import DetailsPageHeading from '../components/DetailsPageHeading/DetailsPageHeading';
+import { useFetchCast } from '../hooks/useFetchCast';
+// import { useNavigate, useLocation } from 'react-router-dom';
+import BackToAllMovies from '../components/BackToAllMovies/BackToAllMovies';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -11,6 +12,11 @@ const Status = {
 };
 
 export default function Cast() {
+  // console.log(navigate);
+
+  // const backToTrend = () => {
+  //   navigate(location?.state?.from.location?.state?.from ?? '/');
+  // };
   // const { movieId } = useParams();
   // const [credits, setCredits] = useState(null);
   // const [error, setError] = useState(null);
@@ -44,13 +50,16 @@ export default function Cast() {
     return (
       <>
         <DetailsPageHeading text="Cast" />
+        <BackToAllMovies />
+        {/* <button type="button" onClick={backToTrend}>
+          Back to all movies
+        </button> */}
         {credits && (
-          <ul className={s.list}>
+          <ul>
             {credits.map(credit => (
               <li key={credit.id}>
                 <p>{credit.name}</p>
                 <img
-                  className={s.image}
                   src={`https://image.tmdb.org/t/p/w500/${credit.profile_path} `}
                   alt={credit.title}
                 />

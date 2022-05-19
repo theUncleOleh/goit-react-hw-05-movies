@@ -1,7 +1,9 @@
-import Loader from '../Loader/Loader';
-import { useFetchReviews } from '../../hooks/useFetchReviews';
+import Loader from '../components/Loader/Loader';
+import { useFetchReviews } from '../hooks/useFetchReviews';
 import Error from 'components/Error/Error';
 import DetailsPageHeading from 'components/DetailsPageHeading/DetailsPageHeading';
+import { useLocation, useNavigate } from 'react-router-dom';
+import BackToAllMovies from 'components/BackToAllMovies/BackToAllMovies';
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -10,6 +12,11 @@ const Status = {
 };
 
 export default function Reviews() {
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const backToTrend = () => {
+  //   navigate(location?.state?.from.location?.state?.from ?? '/');
+  // };
   const { error, status, reviews } = useFetchReviews();
   if (status === Status.IDLE) {
     return <div>Hello</div>;
@@ -25,6 +32,10 @@ export default function Reviews() {
     return (
       <>
         <DetailsPageHeading text="Reviews" />
+        <BackToAllMovies />
+        {/* <button type="button" onClick={backToTrend}>
+          Back all movies
+        </button> */}
         {reviews && (
           <ul>
             {reviews.map(review => (
