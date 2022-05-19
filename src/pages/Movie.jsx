@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
 import * as getAxiosMovie from '../servis-api/getAxiosMovie';
-
+import BackToTrendButton from '../components/BackToTrendButton/BackToTrendButton';
 import Error from '../components/Error/Error';
 import Loader from 'react-spinners/PropagateLoader';
 import PropTypes from 'prop-types';
@@ -52,6 +52,7 @@ export default function Movie() {
     return (
       <>
         <PageHeading text="Movie" />
+        <BackToTrendButton />
         <SearchData onSubmit={handleSubmit} />
       </>
     );
@@ -60,6 +61,7 @@ export default function Movie() {
     return (
       <>
         <PageHeading text="Movie" />
+        <BackToTrendButton />
         <SearchData onSubmit={handleSubmit} />
         {movies && (
           <ul>

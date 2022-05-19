@@ -2,7 +2,7 @@ import Loader from '../components/Loader/Loader';
 import { useFetchReviews } from '../hooks/useFetchReviews';
 import Error from 'components/Error/Error';
 import DetailsPageHeading from 'components/DetailsPageHeading/DetailsPageHeading';
-import { useLocation, useNavigate } from 'react-router-dom';
+
 import BackToAllMovies from 'components/BackToAllMovies/BackToAllMovies';
 const Status = {
   IDLE: 'idle',

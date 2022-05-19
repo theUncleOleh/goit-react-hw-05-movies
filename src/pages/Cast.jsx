@@ -2,7 +2,7 @@ import Loader from '../components/Loader/Loader';
 import Error from 'components/Error/Error';
 import DetailsPageHeading from '../components/DetailsPageHeading/DetailsPageHeading';
 import { useFetchCast } from '../hooks/useFetchCast';
-// import { useNavigate, useLocation } from 'react-router-dom';
+
 import BackToAllMovies from '../components/BackToAllMovies/BackToAllMovies';
 const Status = {
   IDLE: 'idle',
@@ -12,11 +12,6 @@ const Status = {
 };
 
 export default function Cast() {
-  // console.log(navigate);
-
-  // const backToTrend = () => {
-  //   navigate(location?.state?.from.location?.state?.from ?? '/');
-  // };
   // const { movieId } = useParams();
   // const [credits, setCredits] = useState(null);
   // const [error, setError] = useState(null);
@@ -51,9 +46,7 @@ export default function Cast() {
       <>
         <DetailsPageHeading text="Cast" />
         <BackToAllMovies />
-        {/* <button type="button" onClick={backToTrend}>
-          Back to all movies
-        </button> */}
+
         {credits && (
           <ul>
             {credits.map(credit => (

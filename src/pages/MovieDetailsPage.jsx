@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-
+import BackToTrendButton from '../components/BackToTrendButton/BackToTrendButton';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
 import PageHeading from 'components/PageHeading/PageHeading';
@@ -50,9 +50,7 @@ export default function MovieDetailsPage() {
     return (
       <>
         <PageHeading text="Movie Details" />
-        <button type="button" onClick={onGoBack}>
-          Go home
-        </button>
+        <BackToTrendButton />
         {movieDetails && (
           <>
             <h2>{movieDetails.title}</h2>
@@ -81,7 +79,16 @@ export default function MovieDetailsPage() {
                 </Link>
               </li>
               <li>
-                <Link to={'reviews'}>Reviews</Link>
+                <Link
+                  to={'reviews'}
+                  state={{
+                    from: {
+                      location,
+                    },
+                  }}
+                >
+                  Reviews
+                </Link>
               </li>
             </ul>
             <hr />

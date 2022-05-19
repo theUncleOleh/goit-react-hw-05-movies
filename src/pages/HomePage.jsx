@@ -1,6 +1,6 @@
 import PageHeading from 'components/PageHeading/PageHeading';
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 // import s from './HomePage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
