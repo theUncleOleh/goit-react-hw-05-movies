@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import BackToTrendButton from '../components/BackToTrendButton/BackToTrendButton';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
@@ -12,11 +12,8 @@ const Status = {
 };
 export default function MovieDetailsPage() {
   const { movieDetails, status, error } = useFetchMovieDetails();
-  const navigate = useNavigate();
   const location = useLocation();
-  const onGoBack = () => {
-    navigate(location?.state?.from ?? '/');
-  };
+
   // // const { movieId } = useParams();
   // const [error, setError] = useState(null);
   // const [status, setStatus] = useState(Status.IDLE);
