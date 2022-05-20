@@ -1,14 +1,6 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import slugify from 'slugify';
-import s from './CardList.module.css';
-
-const makeSlug = string =>
-  slugify(string, {
-    lower: true,
-  });
-
-export default function CardInCardList({ movies }) {
-  const location = useLocation();
+import { NavLink } from 'react-router-dom';
+import s from './FoundCardMovies.module.css';
+export default function CardFindMovies({ movies }) {
   return (
     movies && (
       <ul className={s.list}>
@@ -20,8 +12,7 @@ export default function CardInCardList({ movies }) {
               alt={movie.title}
             />
             <NavLink
-              to={`movies/${makeSlug(`${movie.title} ${movie.id}`)}`}
-              state={{ from: location }}
+              to={`${movie.id}`}
               className={({ isActive }) => (!isActive ? s.link : s.active)}
             >
               {movie.title}

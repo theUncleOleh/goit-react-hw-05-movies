@@ -1,5 +1,5 @@
 import PageHeading from '../components/PageHeading/PageHeading';
-import { NavLink } from 'react-router-dom';
+import FoundCardMovies from '../components/FoundCardMovies/FoundCardFMovies';
 import SearchData from '../components/SearchData/SearchData';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +9,7 @@ import BackToTrendButton from '../components/BackToTrendButton/BackToTrendButton
 import Error from '../components/Error/Error';
 import Loader from 'react-spinners/PropagateLoader';
 import PropTypes from 'prop-types';
+
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -63,15 +64,7 @@ export default function Movie() {
         <PageHeading text="Movie" />
         <BackToTrendButton />
         <SearchData onSubmit={handleSubmit} />
-        {movies && (
-          <ul>
-            {movies.map(movie => (
-              <li key={movie.id}>
-                <NavLink to={`${movie.id}`}>{movie.title}</NavLink>
-              </li>
-            ))}
-          </ul>
-        )}
+        <FoundCardMovies movies={movies} />
         <ToastContainer
           position="top-right"
           autoClose={5000}

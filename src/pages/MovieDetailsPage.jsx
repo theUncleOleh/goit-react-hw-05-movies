@@ -29,7 +29,7 @@ export default function MovieDetailsPage() {
   if (status === Status.RESOLVED) {
     return (
       <>
-        <PageHeading text="Movie Details" />
+        <PageHeading text="Movie details" />
         <BackToTrendButton />
         <CardOfOneMovie movieDetails={movieDetails} />
 

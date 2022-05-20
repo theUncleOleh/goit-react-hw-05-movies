@@ -1,6 +1,6 @@
 import PageHeading from 'components/PageHeading/PageHeading';
 import { useState, useEffect } from 'react';
-import CardInCardList from '../components/CardList/CardList';
+import CardList from '../components/CardList/CardList';
 // import s from './HomePage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
@@ -43,7 +43,7 @@ export default function HomePage() {
     return (
       <>
         <PageHeading text="Trend movies on this week" />
-        <CardInCardList movies={movies} />
+        <CardList movies={movies} />
       </>
     );
   }

@@ -1,6 +1,6 @@
 .header {
     display: flex;
-   
+   border-radius: 8px;
     align-items: center;
     min-height: 80px;
     margin-bottom: 16px;

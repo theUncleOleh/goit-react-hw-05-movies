@@ -8,7 +8,8 @@ const Status = {
   RESOLVED: 'resolved',
 };
 export const useFetchReviews = () => {
-  const { movieId } = useParams();
+  const { slug } = useParams();
+  const movieId = slug.match(/[a-z0-9]+$/)[0];
   const [reviews, setReviews] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
