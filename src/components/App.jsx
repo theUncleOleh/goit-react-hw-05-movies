@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import Layout from './Layout';
 import Loader from './Loader/Loader';
+
 // import HomePage from '../pages/HomePage/HomePage';
 
 // import MovieDetailsPage from '../pages/MovieDetailsPage';

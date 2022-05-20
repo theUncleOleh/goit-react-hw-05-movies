@@ -1,6 +1,6 @@
 import PageHeading from 'components/PageHeading/PageHeading';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import CardInCardList from '../components/CardList/CardList';
 // import s from './HomePage.module.css';
 import Loader from 'components/Loader/Loader';
 import Error from 'components/Error/Error';
@@ -15,9 +15,7 @@ export default function HomePage() {
   const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
-  const location = useLocation();
 
-  console.log(location);
   useEffect(() => {
     setStatus(Status.PENDING);
     getAxiosMovie
@@ -45,21 +43,7 @@ export default function HomePage() {
     return (
       <>
         <PageHeading text="Trend movies on this week" />
-        {movies && (
-          <ul>
-            {movies.map(movie => (
-              <li key={movie.id}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path} `}
-                  alt={movie.title}
-                />
-                <Link to={`movies/${movie.id}`} state={{ from: location }}>
-                  {movie.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+        <CardInCardList movies={movies} />
       </>
     );
   }
