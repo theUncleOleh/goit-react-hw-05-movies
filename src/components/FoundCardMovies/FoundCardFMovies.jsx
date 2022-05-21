@@ -1,5 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import s from './FoundCardMovies.module.css';
+import slugify from 'slugify';
+const makeSlug = string =>
+  slugify(string, {
+    lower: true,
+  });
 export default function CardFindMovies({ movies }) {
   return (
     movies && (
@@ -12,7 +17,7 @@ export default function CardFindMovies({ movies }) {
               alt={movie.title}
             />
             <NavLink
-              to={`${movie.id}`}
+              to={`${makeSlug(`${movie.title} ${movie.id}`)}`}
               className={({ isActive }) => (!isActive ? s.link : s.active)}
             >
               {movie.title}
